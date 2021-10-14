@@ -26,9 +26,9 @@
     <version>${revision}</version>
   </parent>
 
-  <artifactId>feast-serving</artifactId>
-  <name>Feast Serving</name>
-  <description>Feature serving API service</description>
+  <artifactId>inmemory-plugin</artifactId>
+  <name>inmemory-plugin</name>
+  <description>Plugin for feast-serving</description>
 
   <build>
     <plugins>
@@ -46,19 +46,19 @@
       </plugin>
 
       <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
         <configuration>
-          <skip>false</skip>
+          <archive>
+            <manifestEntries>
+              <Plugin-Class>feast.plugin.inmemory.InMemoryOnlineRetrieverPlugin</Plugin-Class>
+              <Plugin-Id>inmemory-plugin</Plugin-Id>
+              <Plugin-Provider>Feast</Plugin-Provider>
+              <Plugin-Version>0.0.1</Plugin-Version>
+              <Plugin-Dependencies />
+            </manifestEntries>
+          </archive>
         </configuration>
-        <executions>
-          <execution>
-            <id>build-info</id>
-            <goals>
-              <goal>build-info</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
 
     </plugins>
@@ -71,7 +71,6 @@
       <version>${project.version}</version>
     </dependency>
 
-
     <dependency>
       <groupId>dev.feast</groupId>
       <artifactId>feast-storage-api</artifactId>
@@ -80,20 +79,20 @@
 
     <dependency>
       <groupId>dev.feast</groupId>
-      <artifactId>feast-storage-connector-redis</artifactId>
+      <artifactId>feast-serving</artifactId>
       <version>${project.version}</version>
     </dependency>
 
     <dependency>
-      <groupId>dev.feast</groupId>
-      <artifactId>feast-storage-connector-bigtable</artifactId>
-      <version>${project.version}</version>
+      <groupId>org.pf4j</groupId>
+      <artifactId>pf4j-spring</artifactId>
+      <version>0.7.0</version>
     </dependency>
 
     <dependency>
-      <groupId>dev.feast</groupId>
-      <artifactId>feast-storage-connector-cassandra</artifactId>
-      <version>${project.version}</version>
+      <groupId>org.pf4j</groupId>
+      <artifactId>pf4j</artifactId>
+      <version>3.6.0</version>
     </dependency>
 
     <dependency>
@@ -108,17 +107,7 @@
       <version>0.130.2</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>org.pf4j</groupId>
-      <artifactId>pf4j-spring</artifactId>
-      <version>0.7.0</version>
-    </dependency>
 
-    <dependency>
-      <groupId>org.pf4j</groupId>
-      <artifactId>pf4j</artifactId>
-      <version>3.6.0</version>
-    </dependency>
 
     <!-- TODO: SLF4J is being used via Lombok, but also jog4j - pick one -->
     <dependency>
@@ -136,11 +125,6 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
-    <!--compile 'org.springframework.boot:spring-boot-starter-log4j2'-->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-log4j2</artifactId>
     </dependency>
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>

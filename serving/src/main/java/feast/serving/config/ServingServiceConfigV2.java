@@ -41,13 +41,11 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.pf4j.spring.SpringPluginManager;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Conditional;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.*;
 
 @Configuration
 public class ServingServiceConfigV2 {
@@ -68,6 +66,11 @@ public class ServingServiceConfigV2 {
             .setInstanceId(instanceId)
             .setAppProfileId(config.getAppProfileId())
             .build());
+  }
+
+  @Bean
+  public SpringPluginManager pluginManager() {
+    return new SpringPluginManager();
   }
 
   @Bean

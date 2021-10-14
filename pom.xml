@@ -34,6 +34,7 @@
         <module>core</module>
         <module>serving</module>
         <module>sdk/java</module>
+        <module>inmemory-plugin</module>
         <module>docs/coverage/java</module>
         <module>common</module>
         <module>common-test</module>
@@ -295,6 +296,18 @@
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger-ui</artifactId>
                 <version>${springfox.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.pf4j</groupId>
+                <artifactId>pf4j-spring</artifactId>
+                <version>0.7.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.pf4j</groupId>
+                <artifactId>pf4j</artifactId>
+                <version>3.6.0</version>
             </dependency>
 
             <!-- Spring Extended -->
